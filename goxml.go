@@ -70,7 +70,7 @@ func firstNode(parent *Node, xmlStr string) (*Node, string, string) {
 		return nil, "", ""
 	}
 	nodeAttrStr := strings.TrimSpace(endMatch[1])
-	nodeContentText := strings.TrimSpace(endMatch[2])
+	nodeContentText := endMatch[2]
 	nextStr := strings.TrimSpace(endMatch[3])
 	node := createNode(nodeTag, nodeContentText, nodeAttrStr)
 	if parent != nil {
@@ -82,7 +82,7 @@ func firstNode(parent *Node, xmlStr string) (*Node, string, string) {
 func createNode(tag string, content string, attrs string) *Node {
 	return &Node{
 		TagName: strings.TrimSpace(tag),
-		Content: strings.TrimSpace(content),
+		Content: content,
 		Attrs:   buildNodeAttrs(attrs),
 	}
 }
@@ -100,8 +100,15 @@ func buildNodeAttrs(attrsStr string) map[string]string {
 		return res
 	}
 	for _, match := range matches {
-		if len(match) > 3 {
-			res[match[2]] = match[3]
+		if len(match) == 6 {
+			value, match4, match5 := "", match[4], match[5]
+			if len(match4) > 0 {
+				value = match[4]
+			}
+			if len(match5) > 0 {
+				value = match5
+			}
+			res[match[2]] = value
 		}
 	}
 	return res

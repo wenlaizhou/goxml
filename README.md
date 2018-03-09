@@ -23,6 +23,17 @@ go get github.com/wenlaizhou/goxml
 ```
 
 ```
-root, err := goxml.ParseFile(fileName)
-println(root.TagName)
+package main
+
+import (
+	"github.com/wenlaizhou/goxml"
+)
+
+func main() {
+	root, err := goxml.ParseFile("demo.xml")
+	if err == nil {
+		println(root.TagName)
+	}
+}
+
 ```

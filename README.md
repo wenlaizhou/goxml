@@ -2,8 +2,10 @@
 
 >xml parser for golang
 
+**no othor dependencies**
+
 file in and struct out
-free style
+
 ```
 type Node struct {
 	TagName string
@@ -12,8 +14,13 @@ type Node struct {
 	Attrs   map[string]string
 }
 ```
+free style
 
 use
+
+```
+go get github.com/wenlaizhou/goxml
+```
 
 ```
 root, err := goxml.ParseFile(fileName)
